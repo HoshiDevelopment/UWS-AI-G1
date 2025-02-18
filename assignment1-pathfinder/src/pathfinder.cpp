@@ -113,7 +113,7 @@ int main()
         
     }
   
-    DrawText(TextFormat("Time: %d", t), 10, 100, 20, BLACK);
+    //DrawText(TextFormat("Time: %d", t), 10, 100, 20, BLACK);
 
 
     if (IsMouseButtonPressed(MOUSE_LEFT_BUTTON))
