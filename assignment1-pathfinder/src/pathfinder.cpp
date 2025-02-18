@@ -54,7 +54,7 @@ int main()
 //left
   add_node(g, 'H', { half_w - (2 * gap), half_h });
   //right
-  add_node(g, 'I', { half_w + (2 * gap), half_h });
+  //add_node(g, 'I', { half_w + (2 * gap), half_h });
   //down
   add_node(g, 'J', { half_w, half_h + (2 * gap) });
   //up
@@ -75,10 +75,12 @@ int main()
 
   int t{60}; // time
   std::vector<node_t> player_path{};
+
   //Task 14 - Robbie
 
   node_t start = 'A' + GetRandomValue(0, 6);
   node_t end   = 'A' + GetRandomValue(0, 6);
+  player_path.push_back(start);
 
   int tokens{2000}, score{}, high_score{}; // try with more/less tokens?
   int frames = 0;
@@ -112,8 +114,6 @@ int main()
         frames = 0;
         
     }
-  
-    //DrawText(TextFormat("Time: %d", t), 10, 100, 20, BLACK);
 
 
     if (IsMouseButtonPressed(MOUSE_LEFT_BUTTON))
@@ -122,9 +122,13 @@ int main()
       {
         // *opt is a node_t
           // Zac T3
-          DrawText(TextFormat("Score: %08i", score), 110, 110, 20, RED);
-          add_node(g, 'Z', { half_w, half_h });
+          //DrawText(TextFormat("Score: %08i", score), 110, 110, 20, RED);
+          //add_node(g, 'Z', { half_w, half_h });
+          //add_node(g, 'I', { half_w + (2 * gap), half_h });
           // T3
+
+          player_path.push_back(*opt);
+          // playsound
       }
     }
 
