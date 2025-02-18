@@ -40,14 +40,6 @@ int main()
 
   SetTargetFPS(60);
 
-  //variables
-
- // int score = 100;
-  //int tokens = 10;
-  //int highScore = 000;
-  //int time = 0;
-
-  //end variables
 
   Graph g;
   add_node(g, 'A', { half_w - gap, half_h });
@@ -57,6 +49,17 @@ int main()
   add_node(g, 'E', { half_w + gap, half_h + gap });
   add_node(g, 'F', { half_w + gap, half_h });
   add_node(g, 'G', { half_w + (2 * gap), half_h - gap });
+
+  //testing nodes
+  //left
+  add_node(g, 'H', { half_w - (2 * gap), half_h });
+  //right
+  add_node(g, 'I', { half_w + (2 * gap), half_h });
+  //down
+  add_node(g, 'J', { half_w, half_h + (2 * gap) });
+  //up
+  add_node(g, 'K', { half_w, half_h - (2 * gap) });
+
   add_double_edge(g, 'A', 'B');
   add_double_edge(g, 'B', 'C');
   add_double_edge(g, 'B', 'D');
@@ -86,7 +89,8 @@ int main()
     DrawText(TextFormat("Score: %08i", score), 10, 10, 20, RED);
     DrawText(TextFormat("Tokens: %08i", tokens), 190, 10, 20, ORANGE);
     DrawText(TextFormat("High_score: %08i", high_score), 380, 10, 20, PURPLE);
-    DrawText(TextFormat("T: %02.02f ms", GetTime() * 1000), 610, 10, 20, BLACK);
+    DrawText(TextFormat("Timer: %02.02f ms", GetTime() * 1000, t), 610, 10, 20, BLACK);
+    DrawText(TextFormat("T: %08i", t), 780, 10, 20, PURPLE);
 
     draw_graph(g);
 
@@ -95,6 +99,8 @@ int main()
       if (auto opt = get_nearby_node(GetMousePosition()))
       {
         // *opt is a node_t
+          DrawText(TextFormat("Score: %08i", score), 110, 110, 20, RED);
+          add_node(g, 'Z', { half_w, half_h });
       }
     }
 
