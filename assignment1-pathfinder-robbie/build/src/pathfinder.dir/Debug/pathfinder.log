@@ -1,0 +1,8 @@
+﻿  pathfinder.cpp
+C:\Users\B01741425\Desktop\assignment1-pathfinder\src\pathfinder.cpp(25,39): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+C:\Users\B01741425\Desktop\assignment1-pathfinder\src\pathfinder.cpp(25,25): warning C4267: 'initializing': conversion from 'size_t' to 'const int', possible loss of data
+C:\Users\B01741425\Desktop\assignment1-pathfinder\src\pathfinder.cpp(81,52): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+C:\Users\B01741425\Desktop\assignment1-pathfinder\src\pathfinder.cpp(81,32): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+C:\Users\B01741425\Desktop\assignment1-pathfinder\src\pathfinder.cpp(82,48): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+C:\Users\B01741425\Desktop\assignment1-pathfinder\src\pathfinder.cpp(82,30): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+  pathfinder.vcxproj -> C:\Users\B01741425\Desktop\assignment1-pathfinder\build\src\Debug\pathfinder.exe
