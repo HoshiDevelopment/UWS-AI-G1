@@ -37,6 +37,9 @@ int main()
   //Screen size
   const int w{ 2880/2 }, h{ 1620/2 }, half_w{ w/2 }, half_h{ h/2 }, gap{ w/8 };
   raylib::Window window{ w, h, "Pathfinder" };
+  
+// laoding the sound effect task4 -jack
+Sound clickSound = LoadSound("raylib/resources/audio/sound.wav");  
 
   SetTargetFPS(60);
 
@@ -84,6 +87,7 @@ int main()
 
   int tokens{2000}, score{}, high_score{}; // try with more/less tokens?
   int frames = 0;
+  
 
   while (!window.ShouldClose()) // Detect window close button or ESC key
   {
@@ -115,11 +119,39 @@ int main()
         
     }
 
+    // task 13 - jack
+    // check if game is over 
+    if (t <= 0 || tokens < 0) {
+
+      if (score > high_score) {
+        high_score = score; // will update high score if needed
+      }
+
+      // reset score, tokens levl etc
+      score = 0;
+      tokens = 2000;
+
+      // restart level
+      player_path.clear();
+      player_path.push_back(start);
+
+      t = 60; // reset timer
+
+    }
+
 
     if (IsMouseButtonPressed(MOUSE_LEFT_BUTTON))
     {
       if (auto opt = get_nearby_node(GetMousePosition()))
       {
+
+        // TASK 6 - jack 
+
+        std::vector<node_t> start_neighbours = get_neighbours(g, start); // neighbours start of the node
+
+        if(std::find(start_neighbours.begin(), start_neighbours.end(), *opt) != start_neighbours.end())
+        {
+          
         // *opt is a node_t
           // Zac T3
           //DrawText(TextFormat("Score: %08i", score), 110, 110, 20, RED);
@@ -127,8 +159,13 @@ int main()
           //add_node(g, 'I', { half_w + (2 * gap), half_h });
           // T3
 
-          player_path.push_back(*opt);
+          player_path.push_back(*opt); // add node if valid neighbour
           // playsound
+      }
+        else if (player_path.size() > 0)
+        {
+          player_path.push_back(*opt); // after the first valid node this will add other ones normally
+    }
       }
     }
 
