@@ -154,13 +154,10 @@ Sound clickSound = LoadSound("raylib/resources/audio/sound.wav");
           
         // *opt is a node_t
           // Zac T3
-          //DrawText(TextFormat("Score: %08i", score), 110, 110, 20, RED);
-          //add_node(g, 'Z', { half_w, half_h });
-          //add_node(g, 'I', { half_w + (2 * gap), half_h });
-          // T3
 
           player_path.push_back(*opt); // add node if valid neighbour
           // playsound
+          // T3
       }
         else if (player_path.size() > 0)
         {

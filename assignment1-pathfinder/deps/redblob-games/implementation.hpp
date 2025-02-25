@@ -261,7 +261,8 @@ std::vector<Location> reconstruct_path(
 }
 
 inline double heuristic(GridLocation a, GridLocation b) {
-  return std::abs(a.x - b.x) + std::abs(a.y - b.y);
+  //return std::abs(a.x - b.x) + std::abs(a.y - b.y);
+  return sqrt((a.x - b.x) * (a.x - b.x) + (a.y - b.y) * (a.y - b.y));
 }
 
 template<typename Location, typename Graph>
