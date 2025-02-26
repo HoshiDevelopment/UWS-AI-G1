@@ -147,11 +147,12 @@ Sound clickSound = LoadSound("raylib/resources/audio/sound.wav");
 
         // TASK 6 - jack 
 
-        std::vector<node_t> start_neighbours = get_neighbours(g, start); // neighbours start of the node
+        std::vector<node_t> start_neighbours = g.neighbours(start); // neighbours start of the node
 
-        if(std::find(start_neighbours.begin(), start_neighbours.end(), *opt) != start_neighbours.end())
+        if(player_path.empty())
         {
-          
+          if (stdd::find(start_neighbours.begin(), start_neighbours.end(), *opt) != start_neighbours.end())
+          {
         // *opt is a node_t
           // Zac T3
 
@@ -159,10 +160,11 @@ Sound clickSound = LoadSound("raylib/resources/audio/sound.wav");
           // playsound
           // T3
       }
-        else if (player_path.size() > 0)
+        }
+        else
         {
-          player_path.push_back(*opt); // after the first valid node this will add other ones normally
-    }
+          player_path.push_back(*opt);
+        }
       }
     }
 
