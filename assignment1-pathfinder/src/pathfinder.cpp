@@ -145,7 +145,7 @@ Sound clickSound = LoadSound("raylib/resources/audio/sound.wav");
       if (auto opt = get_nearby_node(GetMousePosition()))
       {
 
-        // TASK 6 - jack 
+        // TASK 6 - Jack
 
         std::vector<node_t> start_neighbours = g.neighbours(start); // neighbours start of the node
 
