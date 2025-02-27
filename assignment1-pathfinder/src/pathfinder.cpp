@@ -52,17 +52,6 @@ Sound clickSound = LoadSound("raylib/resources/audio/sound.wav");
   add_node(g, 'F', { half_w + gap, half_h });
   add_node(g, 'G', { half_w + (2 * gap), half_h - gap });
 
-  //Zac T3
-  //testing nodes
-//left
-  add_node(g, 'H', { half_w - (2 * gap), half_h });
-  //right
-  //add_node(g, 'I', { half_w + (2 * gap), half_h });
-  //down
-  add_node(g, 'J', { half_w, half_h + (2 * gap) });
-  //up
-  add_node(g, 'K', { half_w, half_h - (2 * gap) });
-  //T3
 
   add_double_edge(g, 'A', 'B');
   add_double_edge(g, 'B', 'C');
@@ -84,10 +73,19 @@ Sound clickSound = LoadSound("raylib/resources/audio/sound.wav");
   node_t start = 'A' + GetRandomValue(0, 6);
   node_t end   = 'A' + GetRandomValue(0, 6);
   player_path.push_back(start);
+  player_path.push_back(end);
 
   int tokens{2000}, score{}, high_score{}; // try with more/less tokens?
   int frames = 0;
   
+
+  // Display the player's path
+  std::cout << "Player's Path: ";
+  for (char Goals : player_path) {
+      std::cout << Goals << ' ';
+  }
+  std::cout << std::endl;
+ 
 
   while (!window.ShouldClose()) // Detect window close button or ESC key
   {
@@ -97,7 +95,6 @@ Sound clickSound = LoadSound("raylib/resources/audio/sound.wav");
 
     //Zac T1
     //Numbers are X, Y, font size
-    //Need to find out what type of time their after
     DrawText(TextFormat("Score: %08i", score), 10, 10, 20, RED);
     DrawText(TextFormat("Tokens: %08i", tokens), 190, 10, 20, ORANGE);
     DrawText(TextFormat("High_score: %08i", high_score), 380, 10, 20, PURPLE);
@@ -108,8 +105,8 @@ Sound clickSound = LoadSound("raylib/resources/audio/sound.wav");
     draw_graph(g);
 
     //Task 2 - Robbie
-    DrawCircle(node_info[start].x, node_info[start].y, 10, GREEN);
-    DrawCircle(node_info[end].x, node_info[end].y, 10, RED);
+    DrawCircle(node_info[start].x, node_info[start].y, 4, GREEN);
+    DrawCircle(node_info[end].x, node_info[end].y, 4, RED);
 
     // Task 12 - Robbie
     frames++; // increase the frames int by 1 every frame
@@ -142,15 +139,29 @@ Sound clickSound = LoadSound("raylib/resources/audio/sound.wav");
 
     if (IsMouseButtonPressed(MOUSE_LEFT_BUTTON))
     {
+       
       if (auto opt = get_nearby_node(GetMousePosition()))
       {
-
+          //writes in the cmd window what node it's on with each click
+          DrawText(TextFormat("Score: %08i", score), 10, 30, 20, RED);
+          std::cout << "Player's Path: ";
+          for (char Live : player_path) {
+              std::cout << Live << ' ';
+          }
+          std::cout << std::endl;
+         
+         
+          
+       
         // TASK 6 - Jack
 
         std::vector<node_t> start_neighbors = g.neighbors(start); // neighbours start of the node
 
         if(player_path.empty())
         {
+          
+           
+         
           if (std::find(start_neighbors.begin(), start_neighbors.end(), *opt) != start_neighbors.end())
           {
         // *opt is a node_t
@@ -159,7 +170,8 @@ Sound clickSound = LoadSound("raylib/resources/audio/sound.wav");
           player_path.push_back(*opt); // add node if valid neighbour
           // playsound
           // T3
-      }
+
+          }
         }
         else
         {
