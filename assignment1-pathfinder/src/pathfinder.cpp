@@ -173,9 +173,53 @@ Sound clickSound = LoadSound("raylib/resources/audio/sound.wav");
 
           }
         }
-        else
+        else // task 7, 8, 9, 10 - charlie
         {
-          player_path.push_back(*opt);
+          node_t last_node = player_path.back(); // get the last node in path 
+
+          // TASK 10
+          if (*opt == end && last_node == end) // reached end node
+          {
+            // calculates the ideal node, get cost
+            std::vector<node_t> ideal_path = astar_pathfind(g, start, end);
+            int ideal_cost = path_cost(ideal_path);
+
+            // update score 
+            score += ideal_cost;
+
+            // give extra tokens
+            tokens += 500;
+
+            // reset game 
+            player_path.clear();
+            start = 'A' + GetRandomValue(0, 6);
+            end = 'A' + GetRandomValue(0, 6);
+            player_path.push_back(start);
+          } // TASK 10 END
+
+
+
+
+          // TASK 9:
+          if (*opt == last_node && player_path.size() > 1) // not the start node
+          {
+            // refund tokens
+            node_t prev_node = player_path[player_path.size() - 2];
+            tokens += edge_info[{prev_node, last_node}];
+
+            player_path.pop_back(); // remove node
+          } // END OF TASK 9
+
+
+          if (edge_info.find({ last_node, *opt }) != edge_info.end()) // check new node is neighbor of the last node
+          {
+
+            int cost = edge_info[{last_node, * opt}]; // get edge cost
+            tokens -= cost; 
+
+            // end of task 8
+            player_path.push_back(*opt);
+          }
         }
       }
     }
