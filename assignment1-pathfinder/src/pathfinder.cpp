@@ -71,7 +71,14 @@ Sound clickSound = LoadSound("raylib/resources/audio/sound.wav");
   //Task 14 - Robbie
 
   node_t start = 'A' + GetRandomValue(0, 6);
-  node_t end   = 'A' + GetRandomValue(0, 6);
+  node_t end;
+  //node_t end   = 'A' + GetRandomValue(0, 6);
+
+  do {
+      end = 'A' + GetRandomValue(0, 6);
+
+  } while (end == start);
+  std::vector<node_t> playerpath;
   player_path.push_back(start);
   player_path.push_back(end);
 
@@ -103,10 +110,24 @@ Sound clickSound = LoadSound("raylib/resources/audio/sound.wav");
     //T1
 
     draw_graph(g);
+    //Task 5 - Robbie
+    // Draw the player's path in correct order
+    for (size_t i = 1; i < player_path.size(); i++) {
+        node_t current = player_path[i - 1];
+        node_t next = player_path[i];
+
+        // Ensure we're only drawing valid edges
+        if (edge_info.find({ current, next }) != edge_info.end()) {
+            Vector2 startPos = node_info[current];
+            Vector2 endPos = node_info[next];
+
+            DrawLineEx(startPos, endPos, 5, BLUE); // Draw thick blue line for path
+        }
+    }
 
     //Task 2 - Robbie
-    DrawCircle(node_info[start].x, node_info[start].y, 4, GREEN);
-    DrawCircle(node_info[end].x, node_info[end].y, 4, RED);
+    DrawCircle(node_info[start].x, node_info[start].y, 10, GREEN);
+    DrawCircle(node_info[end].x, node_info[end].y, 10, RED);
 
     // Task 12 - Robbie
     frames++; // increase the frames int by 1 every frame
