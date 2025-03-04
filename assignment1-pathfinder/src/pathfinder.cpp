@@ -80,7 +80,7 @@ Sound clickSound = LoadSound("raylib/resources/audio/sound.wav");
   } while (end == start);
   std::vector<node_t> playerpath;
   player_path.push_back(start);
-  player_path.push_back(end);
+  //player_path.push_back(end); // do not uncomment this it breaks the start node (charlie)
 
   int tokens{2000}, score{}, high_score{}; // try with more/less tokens?
   int frames = 0;
@@ -182,41 +182,21 @@ Sound clickSound = LoadSound("raylib/resources/audio/sound.wav");
         {
           
            
-         
-          if (std::find(start_neighbors.begin(), start_neighbors.end(), *opt) != start_neighbors.end())
-          {
-        // *opt is a node_t
-          // Zac T3
+        // DO NOT UNCOMMENT THIS (charlie)
+        //  if (std::find(start_neighbors.begin(), start_neighbors.end(), *opt) != start_neighbors.end())
+        //  {
+        //// *opt is a node_t
+        //  // Zac T3
 
-          player_path.push_back(*opt); // add node if valid neighbour
-          // playsound
-          // T3
+        //  player_path.push_back(*opt); // add node if valid neighbour
+        //  // playsound
+        //  // T3
 
-          }
+        //  } DO NOT UNCOMMENT THIS (charlie)
         }
         else // task 7, 8, 9, 10 - charlie
         {
           node_t last_node = player_path.back(); // get the last node in path 
-
-          // TASK 10
-          if (*opt == end && last_node == end) // reached end node
-          {
-            // calculates the ideal node, get cost
-            std::vector<node_t> ideal_path = astar_pathfind(g, start, end);
-            int ideal_cost = path_cost(ideal_path);
-
-            // update score 
-            score += ideal_cost;
-
-            // give extra tokens
-            tokens += 500;
-
-            // reset game 
-            player_path.clear();
-            start = 'A' + GetRandomValue(0, 6);
-            end = 'A' + GetRandomValue(0, 6);
-            player_path.push_back(start);
-          } // TASK 10 END
 
 
 
@@ -235,12 +215,40 @@ Sound clickSound = LoadSound("raylib/resources/audio/sound.wav");
           if (edge_info.find({ last_node, *opt }) != edge_info.end()) // check new node is neighbor of the last node
           {
 
-            int cost = edge_info[{last_node, * opt}]; // get edge cost
+            int cost = edge_info[{last_node, *opt}]; // get edge cost
             tokens -= cost; 
 
             // end of task 8
             player_path.push_back(*opt);
           }
+
+          // TASK 10
+          last_node = player_path.back();
+          if (*opt == end && last_node == end) // reached end node
+          {
+              // calculates the ideal node, get cost
+              std::vector<node_t> ideal_path = astar_pathfind(g, start, end);
+              int ideal_cost = path_cost(ideal_path);
+
+              // update score 
+              score += ideal_cost;
+
+              // give extra tokens
+              tokens += 500;
+
+              // reset game 
+              player_path.clear();
+              start = 'A' + GetRandomValue(0, 6);
+              end = 'A' + GetRandomValue(0, 6);
+
+              do {
+                  start = 'A' + GetRandomValue(0, 6);
+                  end = 'A' + GetRandomValue(0, 6);
+
+              } while (end == start);
+              std::vector<node_t> playerpath;
+              player_path.push_back(start);
+          } // TASK 10 END
         }
       }
     }
