@@ -105,8 +105,8 @@ Sound clickSound = LoadSound("raylib/resources/audio/sound.wav");
     DrawText(TextFormat("Score: %08i", score), 10, 10, 20, RED);
     DrawText(TextFormat("Tokens: %08i", tokens), 190, 10, 20, ORANGE);
     DrawText(TextFormat("High_score: %08i", high_score), 380, 10, 20, PURPLE);
-    DrawText(TextFormat("Timer: %02.02f ms", GetTime() * 1000, t), 610, 10, 20, BLACK);
-    DrawText(TextFormat("T: %08i", t), 780, 10, 20, PURPLE);
+    //DrawText(TextFormat("Timer: %02.02f ms", GetTime() * 1000, t), 610, 10, 20, BLACK);
+    DrawText(TextFormat("T: %08i", t), 610, 10, 20, PURPLE);
     //T1
 
     draw_graph(g);
